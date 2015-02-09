@@ -14,6 +14,7 @@
 class Twig_Extensions_Extension_Number extends Twig_Extension
 {
     const UNITY_GRAM = 'g';
+    const UNITY_METER = 'g';
     protected static $unities = array(
         self::UNITY_GRAM => array(
             '3'   => 'K', // kilogram
@@ -26,6 +27,18 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
             '-6'  => 'µ',  // microgram (mcg)
             '-9'  => 'n',  // nanogram
             '-12' => 'p',  // picogram
+        ),
+        self::UNITY_METER => array(
+            '3'   => 'K', // kilometer
+            // '2'     => 'H',
+            // '1'     => 'Da',
+            '0'   => '',
+            // '-1'    => 'd', // decigram
+            // '-2'  => 'c',  // centigram
+            '-3'  => 'm',  // millimiter
+            '-6'  => 'µ',  // micrometer
+            '-9'  => 'n',  // nanometer
+            '-12' => 'p',  // picometer
         ),
     );
 
