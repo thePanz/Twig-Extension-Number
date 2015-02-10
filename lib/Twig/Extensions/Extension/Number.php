@@ -13,6 +13,7 @@
  */
 class Twig_Extensions_Extension_Number extends Twig_Extension
 {
+    const DEFAULT_DECIMALS = 2;
     const UNITY_GRAM = 'g';
     const UNITY_METER = 'm';
     protected static $unities = array(
@@ -115,8 +116,11 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
      */
     public function format_meters($number, $decimals = 2)
     {
-        if (! $this->is_valid_value($number)) {
+        if (! $this->is_valid_value($number) || $decimals < 0) {
             return;
+        }
+        if (is_null($decimals)) {
+            $decimals = self::DEFAULT_DECIMALS;
         }
 
         $exp = intval(log10($number));
@@ -134,8 +138,11 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
      */
     public function format_grams($number, $decimals = 2)
     {
-        if (! $this->is_valid_value($number)) {
+        if (! $this->is_valid_value($number) || $decimals < 0) {
             return;
+        }
+        if (is_null($decimals)) {
+            $decimals = self::DEFAULT_DECIMALS;
         }
 
         $exp = intval(log10($number));
