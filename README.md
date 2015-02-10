@@ -1,6 +1,7 @@
 # Twig-Extension-Number
 
-![Travis Build Status](https://travis-ci.org/thePanz/Twig-Extension-Number.svg?branch=1.x)
+[![Travis Build Status](https://travis-ci.org/thePanz/Twig-Extension-Number.svg?branch=1.x)](https://packagist.org/packages/pnz/twig-extension-number) [![Latest Stable Version](https://poser.pugx.org/pnz/twig-extension-number/v/stable.svg)](https://packagist.org/packages/pnz/twig-extension-number) [![Total Downloads](https://poser.pugx.org/pnz/twig-extension-number/downloads.svg)](https://packagist.org/packages/pnz/twig-extension-number) [![Latest Unstable Version](https://poser.pugx.org/pnz/twig-extension-number/v/unstable.svg)](https://packagist.org/packages/pnz/twig-extension-number) [![License](https://poser.pugx.org/pnz/twig-extension-number/license.svg)](https://packagist.org/packages/pnz/twig-extension-number)
+
 
 A Twig extension to handle number formatting.
 
