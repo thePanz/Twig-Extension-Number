@@ -123,7 +123,7 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
             $decimals = self::DEFAULT_DECIMALS;
         }
 
-        $exp = intval(log10($number));
+        $exp = ($number == 0) ? 0 : intval(log10($number));
         $exp = $this->get_nearest_exp($exp, self::UNITY_METER);
         $pre = $this->get_unity_prefix($exp, self::UNITY_METER);
         $value = $number / pow(10, $exp);
@@ -145,7 +145,7 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
             $decimals = self::DEFAULT_DECIMALS;
         }
 
-        $exp = intval(log10($number));
+        $exp = ($number == 0) ? 0 : intval(log10($number));
         $exp = $this->get_nearest_exp($exp, self::UNITY_GRAM);
         $pre = $this->get_unity_prefix($exp, self::UNITY_GRAM);
         $value = $number / pow(10, $exp);
