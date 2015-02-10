@@ -105,7 +105,7 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
      * @dataProvider getDataGrams
      * @param $expected
      * @param $value
-     * @param $base2conversion
+     * @param $decimals
      */
     public function testGramsConversion($expected, $value, $decimals = 2)
     {
