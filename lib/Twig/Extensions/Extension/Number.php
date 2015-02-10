@@ -76,23 +76,25 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
     }
 
     /**
-     * @param int    $search
-     * @param string $unity
-     * @return int   The new exponential to use
+     * @param  int    $search
+     * @param  string $unity
+     * @return int    The new exponential to use
      */
     protected function get_nearest_exp($search, $unity)
     {
         $exps = array_keys(self::$unities[$unity]);
         $closest = array_pop($exps);
 
-        foreach($exps as $value) {
-            if ($value == $search || $search > $value)
+        foreach ($exps as $value) {
+            if ($value == $search || $search > $value) {
                 return $value;
+            }
 
-            if(abs($search - $closest) > abs($value - $search)) {
+            if (abs($search - $closest) > abs($value - $search)) {
                 $closest = $value;
             }
         }
+
         return $closest;
     }
 
@@ -101,13 +103,14 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
      * @param $unity
      * @return string
      */
-    protected function get_unity_prefix($exp, $unity) {
+    protected function get_unity_prefix($exp, $unity)
+    {
         return self::$unities[$unity][$exp];
     }
 
     /**
      * @param $number
-     * @param int $decimals
+     * @param  int    $decimals
      * @return string
      */
     public function format_meters($number, $decimals = 2)
@@ -121,12 +124,12 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
         $pre = $this->get_unity_prefix($exp, self::UNITY_METER);
         $value = $number / pow(10, $exp);
 
-        return sprintf('%.'.$decimals.'f %s' . self::UNITY_METER, $value, $pre);
+        return sprintf('%.'.$decimals.'f %s'.self::UNITY_METER, $value, $pre);
     }
 
     /**
      * @param $number
-     * @param int $decimals
+     * @param  int    $decimals
      * @return string
      */
     public function format_grams($number, $decimals = 2)
@@ -140,14 +143,13 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
         $pre = $this->get_unity_prefix($exp, self::UNITY_GRAM);
         $value = $number / pow(10, $exp);
 
-        // return 'decimals='.$decimals.' | exp='.$exp . ' | unit=' . $pre . ' value=' . $value;
-        return sprintf('%.'.$decimals.'f %sg', $value, $pre);
+        return sprintf('%.'.$decimals.'f %s'.self::UNITY_GRAM, $value, $pre);
     }
 
     /**
      * Filter for converting bytes to a human-readable format, as Unix command "ls -h" does.
      *
-     * @param string|int $number           A string or integer number value to format.
+     * @param string|int $number          A string or integer number value to format.
      * @param bool       $base2conversion Defines if the conversion has to be strictly performed as binary values or
      *                                    by using a decimal conversion such as 1 KByte = 1000 Bytes.
      *
