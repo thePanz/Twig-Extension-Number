@@ -112,4 +112,47 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
         $extension = new Twig_Extensions_Extension_Number();
         $this->assertEquals($expected, $extension->format_grams($value, $decimals));
     }
+
+    /**
+     * @return array
+     */
+    public function getDataMeters()
+    {
+        return array(
+            array(null, 'ThisIsAString'),
+            array(null, ''),
+            array(null, null),
+            array('1000.00 Km', 1000000),
+            array('100.00 Km', 100000),
+            array('10.00 Km', 10000),
+            array('1.00 Km', 1000),
+            array('100.00 m', 100),
+            array('10.00 m', 10),
+            array('1.00 m', 1),
+            array('10.00 cm', 0.1),
+            array('1.00 cm', 0.01),
+            array('1.00 mm', 0.001),
+            array('100.00 µm', 0.0001),
+            array('10.00 µm', 0.00001),
+            array('1.00 µm', 0.000001),
+            array('10.00 nm', 0.00000001),
+            array('1.00 nm', 0.000000001),
+            array('10.00 pm', 0.00000000001),
+            array('1.00 pm', 0.000000000001),
+
+        );
+    }
+
+    /**
+     *
+     * @dataProvider getDataMeters
+     * @param $expected
+     * @param $value
+     * @param $decimals
+     */
+    public function testMetersConversion($expected, $value, $decimals = 2)
+    {
+        $extension = new Twig_Extensions_Extension_Number();
+        $this->assertEquals($expected, $extension->format_meters($value, $decimals));
+    }
 }

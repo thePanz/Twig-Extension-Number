@@ -14,7 +14,7 @@
 class Twig_Extensions_Extension_Number extends Twig_Extension
 {
     const UNITY_GRAM = 'g';
-    const UNITY_METER = 'g';
+    const UNITY_METER = 'm';
     protected static $unities = array(
         self::UNITY_GRAM => array(
             '3'   => 'K', // kilogram
@@ -33,8 +33,8 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
             // '2'     => 'H',
             // '1'     => 'Da',
             '0'   => '',
-            // '-1'    => 'd', // decigram
-            // '-2'  => 'c',  // centigram
+            // '-1'    => 'd', // decimeter
+            '-2'  => 'c',  // centimeter
             '-3'  => 'm',  // millimiter
             '-6'  => 'µ',  // micrometer
             '-9'  => 'n',  // nanometer
@@ -52,6 +52,7 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
         return array(
             new Twig_SimpleFilter('format_bytes',  array($this, 'format_bytes')),
             new Twig_SimpleFilter('format_grams',  array($this, 'format_grams')),
+            new Twig_SimpleFilter('format_meters',  array($this, 'format_meters')),
         );
     }
 
@@ -104,6 +105,24 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
         return self::$unities[$unity][$exp];
     }
 
+    /**
+     * @param $number
+     * @param int $decimals
+     * @return string
+     */
+    public function format_meters($number, $decimals = 2)
+    {
+        if (! $this->is_valid_value($number)) {
+            return;
+        }
+
+        $exp = intval(log10($number));
+        $exp = $this->get_nearest_exp($exp, self::UNITY_METER);
+        $pre = $this->get_unity_prefix($exp, self::UNITY_METER);
+        $value = $number / pow(10, $exp);
+
+        return sprintf('%.'.$decimals.'f %s' . self::UNITY_METER, $value, $pre);
+    }
 
     /**
      * @param $number
