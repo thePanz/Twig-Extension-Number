@@ -110,47 +110,46 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
     }
 
     /**
-     * @param $number
-     * @param  int    $decimals
+     * @param  int|float|string $number
+     * @param  int              $decimals
+     * @param  string           $unity
+     * @return string
+     */
+    protected function format_unity($number, $decimals, $unity)
+    {
+        if (! $this->is_valid_value($number) || $decimals < 0) {
+            return;
+        }
+        if (is_null($decimals)) {
+            $decimals = self::DEFAULT_DECIMALS;
+        }
+
+        $exp = ($number == 0) ? 0 : intval(log10($number));
+        $exp = $this->get_nearest_exp($exp, $unity);
+        $pre = $this->get_unity_prefix($exp, $unity);
+        $value = $number / pow(10, $exp);
+
+        return sprintf('%.'.$decimals.'f %s'.$unity, $value, $pre);
+    }
+
+    /**
+     * @param  int|float|string $number
+     * @param  int              $decimals
      * @return string
      */
     public function format_meters($number, $decimals = 2)
     {
-        if (! $this->is_valid_value($number) || $decimals < 0) {
-            return;
-        }
-        if (is_null($decimals)) {
-            $decimals = self::DEFAULT_DECIMALS;
-        }
-
-        $exp = ($number == 0) ? 0 : intval(log10($number));
-        $exp = $this->get_nearest_exp($exp, self::UNITY_METER);
-        $pre = $this->get_unity_prefix($exp, self::UNITY_METER);
-        $value = $number / pow(10, $exp);
-
-        return sprintf('%.'.$decimals.'f %s'.self::UNITY_METER, $value, $pre);
+        return $this->format_unity($number, $decimals, self::UNITY_METER);
     }
 
     /**
-     * @param $number
-     * @param  int    $decimals
+     * @param  int|float|string $number
+     * @param  int              $decimals
      * @return string
      */
     public function format_grams($number, $decimals = 2)
     {
-        if (! $this->is_valid_value($number) || $decimals < 0) {
-            return;
-        }
-        if (is_null($decimals)) {
-            $decimals = self::DEFAULT_DECIMALS;
-        }
-
-        $exp = ($number == 0) ? 0 : intval(log10($number));
-        $exp = $this->get_nearest_exp($exp, self::UNITY_GRAM);
-        $pre = $this->get_unity_prefix($exp, self::UNITY_GRAM);
-        $value = $number / pow(10, $exp);
-
-        return sprintf('%.'.$decimals.'f %s'.self::UNITY_GRAM, $value, $pre);
+        return $this->format_unity($number, $decimals, self::UNITY_GRAM);
     }
 
     /**
