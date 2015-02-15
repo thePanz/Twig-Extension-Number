@@ -15,6 +15,24 @@ Included filters:
  - `format_meters` : Format the given amount as "meters" in an human readable format
 
 
+## Examples
+
+Display the value 4000 grams in a human readable format (4.00 Kg):
+```
+{{ 4000 | format_grams }}
+```
+
+[Decimals] Display the value 4000 grams in a human readable format with 3 decimals (4.000 Kg):
+```
+{{ 4000 | format_grams(3) }}
+```
+
+[UnityBias] Display the value 4000 milligrams as grams in a human readable format with 3 decimals (4.00 g):
+```
+{{ 4000 | format_grams(3, 1E-3) }}
+```
+
+
 ## Todo
  - [] Implement I18n of number values
  - [] Implement `format_liters` filter
