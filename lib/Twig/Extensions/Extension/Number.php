@@ -111,17 +111,22 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
 
     /**
      * @param  int|float|string $number
-     * @param  int              $decimals
-     * @param  string           $unity
+     * @param  int $decimals
+     * @param  string $unity
+     * @param int $unityBias
      * @return string
      */
-    protected function format_unity($number, $decimals, $unity)
+    protected function format_unity($number, $decimals, $unity, $unityBias = 1)
     {
         if (! $this->is_valid_value($number) || $decimals < 0) {
             return;
         }
         if (is_null($decimals)) {
             $decimals = self::DEFAULT_DECIMALS;
+        }
+
+        if ($unityBias !== 1 && $unityBias !== 0 && !is_null($unityBias)) {
+            $number *= $unityBias;
         }
 
         $exp = ($number == 0) ? 0 : intval(log10($number));
@@ -137,9 +142,9 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
      * @param  int              $decimals
      * @return string
      */
-    public function format_meters($number, $decimals = 2)
+    public function format_meters($number, $decimals = 2, $unityBias = 1)
     {
-        return $this->format_unity($number, $decimals, self::UNITY_METER);
+        return $this->format_unity($number, $decimals, self::UNITY_METER, $unityBias);
     }
 
     /**
@@ -147,9 +152,9 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
      * @param  int              $decimals
      * @return string
      */
-    public function format_grams($number, $decimals = 2)
+    public function format_grams($number, $decimals = 2, $unityBias = 1)
     {
-        return $this->format_unity($number, $decimals, self::UNITY_GRAM);
+        return $this->format_unity($number, $decimals, self::UNITY_GRAM, $unityBias);
     }
 
     /**

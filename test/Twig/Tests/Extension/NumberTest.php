@@ -94,6 +94,14 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
             array('0.00 g', 0, 2),
             array('0.000 g', 0, 3),
             array('0 g', 0, 0),
+            array('1.00 g', 1),
+            array('1.00 g', 1, null, 1),
+            array('1.00 mg', 1, null, 1E-3),
+            array('1.00 µg', 1, null, 1E-6),
+            array('1.00 Kg', 1, null, 1E3),
+            array('1.00 g', 1000, null, 1E-3),
+            array('1000.00 Kg', 1000, null, 1E3),
+            array('1.00 mg', 1000, null, 1E-6),
             array('1.00 g', 1, null),
             array('1 g', 1, 0),
             array('1.0 g', 1, 1),
@@ -114,6 +122,21 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
             array('10.00 pg', 0.00000000001),
             array('1.00 pg', 0.000000000001),
 
+            // Roundings
+            array('2.50 g', 2.5, null, 1),
+            array('2.50 mg', 2.5, null, 1E-3),
+            array('2.50 Kg', 2.5, null, 1E3),
+            array('2.50 Kg', 2.501, null, 1E3),
+            array('2.51 Kg', 2.508, null, 1E3),
+
+            // Biased Conversions
+            array('1.00 g', 1, null, 1),
+            array('1.00 mg', 1, null, 1E-3),
+            array('1.00 µg', 1, null, 1E-6),
+            array('1.00 Kg', 1, null, 1E3),
+            array('1.00 g', 1000, null, 1E-3),
+            array('1000.00 Kg', 1000, null, 1E3),
+            array('1.00 mg', 1000, null, 1E-6),
         );
     }
 
@@ -124,10 +147,10 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
      * @param $value
      * @param $decimals
      */
-    public function testGramsConversion($expected, $value, $decimals = 2)
+    public function testGramsConversion($expected, $value, $decimals = 2, $unityBias = 1)
     {
         $extension = new Twig_Extensions_Extension_Number();
-        $this->assertEquals($expected, $extension->format_grams($value, $decimals));
+        $this->assertEquals($expected, $extension->format_grams($value, $decimals, $unityBias));
     }
 
     /**
@@ -155,6 +178,7 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
             array('0.00 m', 0, 2),
             array('0.000 m', 0, 3),
             array('0 m', 0, 0),
+            array('1.00 m', 1),
             array('1.00 m', 1, null),
             array('1 m', 1, 0),
             array('1.0 m', 1, 1),
@@ -175,6 +199,21 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
             array('10.00 pm', 0.00000000001),
             array('1.00 pm', 0.000000000001),
 
+            // Roundings
+            array('2.50 m', 2.5, null, 1),
+            array('0.25 cm', 2.5, null, 1E-3),
+            array('2.50 Km', 2.5, null, 1E3),
+            array('2.50 Km', 2.501, null, 1E3),
+            array('2.51 Km', 2.508, null, 1E3),
+
+            // Biased Conversions
+            array('1.00 m', 1, null, 1),
+            array('1.00 mm', 1, null, 1E-3),
+            array('1.00 µm', 1, null, 1E-6),
+            array('1.00 Km', 1, null, 1E3),
+            array('1.00 m', 1000, null, 1E-3),
+            array('1000.00 Km', 1000, null, 1E3),
+            array('1.00 mm', 1000, null, 1E-6),
         );
     }
 
@@ -185,9 +224,9 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
      * @param $value
      * @param $decimals
      */
-    public function testMetersConversion($expected, $value, $decimals = 2)
+    public function testMetersConversion($expected, $value, $decimals = 2, $unityBias = 1)
     {
         $extension = new Twig_Extensions_Extension_Number();
-        $this->assertEquals($expected, $extension->format_meters($value, $decimals));
+        $this->assertEquals($expected, $extension->format_meters($value, $decimals, $unityBias));
     }
 }
