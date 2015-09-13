@@ -129,7 +129,7 @@ class Twig_Extensions_Extension_Number extends Twig_Extension
             $number *= $unityBias;
         }
 
-        $exp = ($number == 0) ? 0 : intval(log10($number));
+        $exp = ($number == 0) ? 0 : intval(log10(abs($number)));
         $exp = $this->get_nearest_exp($exp, $unity);
         $pre = $this->get_unity_prefix($exp, $unity);
         $value = $number / pow(10, $exp);

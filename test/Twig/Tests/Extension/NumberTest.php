@@ -137,6 +137,14 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
             array('1.00 g', 1000, null, 1E-3),
             array('1000.00 Kg', 1000, null, 1E3),
             array('1.00 mg', 1000, null, 1E-6),
+
+            // Negative numbers
+            array('-1.00 g', 1, null, -1),
+            array('-1.20 g', 1, null, -1.2),
+            array('-10.00 mg', 1, null, -1E-2),
+            array('-1.00 mg', 1, null, -1E-3),
+            array('-1.00 Kg', 1, null, -1E3),
+            array('-1000.00 Kg', 1, null, -1E6),
         );
     }
 
@@ -214,6 +222,14 @@ class Twig_Tests_Extension_NumberTest extends PHPUnit_Framework_TestCase
             array('1.00 m', 1000, null, 1E-3),
             array('1000.00 Km', 1000, null, 1E3),
             array('1.00 mm', 1000, null, 1E-6),
+
+            // Negative numbers
+            array('-1.00 m', 1, null, -1),
+            array('-1.20 m', 1, null, -1.2),
+            array('-1.00 mm', 1, null, -1E-3),
+            array('-1.00 cm', 1, null, -1E-2),
+            array('-1.00 Km', 1, null, -1E3),
+            array('-1000.00 Km', 1, null, -1E6),
         );
     }
 
