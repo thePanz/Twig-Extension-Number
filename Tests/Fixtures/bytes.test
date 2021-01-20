@@ -1,0 +1,58 @@
+--TEST--
+"format_bytes" filter
+--TEMPLATE--
+{{ 0|format_bytes }}
+{{ 0|format_bytes(false) }}
+{{ 1|format_bytes }}
+{{ 1|format_bytes(false) }}
+{{ 1000|format_bytes }}
+{{ 1000|format_bytes(false) }}
+{{ 1024|format_bytes }}
+{{ 1024|format_bytes(false) }}
+{{ 2048|format_bytes }}
+{{ 2048|format_bytes(false) }}
+{{ 2048|format_bytes }}
+{{ 2048|format_bytes(false) }}
+{{ 2500|format_bytes }}
+{{ 2500|format_bytes(false) }}
+{{ 1000000|format_bytes }}
+{{ 1000000|format_bytes(false) }}
+{{ 1048576|format_bytes }}
+{{ 1048576|format_bytes(false) }}
+{{ 1000000000|format_bytes }}
+{{ 1000000000|format_bytes(false) }}
+{{ 1073741824|format_bytes }}
+{{ 1073741824|format_bytes(false) }}
+{{ 1099511627776|format_bytes }}
+{{ 1099511627776|format_bytes(false) }}
+{{ (1.12589990684263e+15)|format_bytes }}
+{{ (1.12589990684263e+15)|format_bytes(false) }}
+--DATA--
+return []
+--EXPECT--
+0 B
+0 B
+1 B
+1 B
+1000 B
+1.0 KiB
+1.0 kB
+1.0 KiB
+2.0 kB
+2.0 KiB
+2.0 kB
+2.0 KiB
+2.4 kB
+2.5 KiB
+976.6 kB
+1.0 MiB
+1.0 MB
+1.0 MiB
+953.7 MB
+1.0 GiB
+1.0 GB
+1.1 GiB
+1.0 TB
+1.1 TiB
+1.0 PB
+1.1 PiB

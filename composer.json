@@ -1,9 +1,12 @@
 {
     "name": "pnz/twig-extension-number",
-    "description": "",
-    "keywords": ["i18n","number"],
-    "homepage": "https://github.com/thePanz/Twig-Extension-Number",
     "type": "library",
+    "description": "A Twig extension for number formatting",
+    "keywords": [
+        "i18n",
+        "number"
+    ],
+    "homepage": "https://github.com/thePanz/Twig-Extension-Number",
     "license": "MIT",
     "authors": [
         {
@@ -12,16 +15,23 @@
         }
     ],
     "require": {
-        "twig/twig": "~1.12 || ~2.0",
-        "twig/extensions": "~1.2"
+        "php": ">=7.2.5",
+        "twig/twig": "^2.4 || ^3.0"
     },
     "require-dev": {
-        "symfony/translation": "~2.3"
+        "phpunit/phpunit": "^8.5 || ^9.5"
     },
-    "suggest": {
-        "symfony/translation": "Allow the output to be translated"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
     },
     "autoload": {
-        "psr-0": { "Twig_Extensions_": "lib/" }
+        "psr-4": {
+            "Pnz\\TwigExtensionNumber\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     }
 }

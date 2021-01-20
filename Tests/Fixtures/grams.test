@@ -1,0 +1,26 @@
+--TEST--
+"format_grams" filter
+--TEMPLATE--
+{{ 1000000|format_grams }}
+{{ 100000|format_grams }}
+{{ 10000|format_grams }}
+{{ 1000|format_grams }}
+{{ 100|format_grams }}
+{{ 10|format_grams }}
+{{ 1|format_grams }}
+{{ 0|format_grams }}
+{{ '0.0'|format_grams() }}
+{{ (0.0)|format_grams(0) }}
+--DATA--
+return [];
+--EXPECT--
+1000.00 Kg
+100.00 Kg
+10.00 Kg
+1.00 Kg
+100.00 g
+10.00 g
+1.00 g
+0.00 g
+0.00 g
+0 g
