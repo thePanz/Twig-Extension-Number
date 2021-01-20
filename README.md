@@ -35,6 +35,11 @@ The filter allows some customization of the output, given its signature `filter_
 
 ## Install
 
+Via composer:
+```shell
+    composer require "pnz/twig-extension-number"
+```
+
 In Symfony, tag `Pnz\TwigExtensionNumber\Number` with `twig.extension`, and the filter will be
 automatically registered.
 
